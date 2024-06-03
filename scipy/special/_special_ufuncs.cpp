@@ -243,7 +243,7 @@ PyMODINIT_FUNC PyInit__special_ufuncs() {
     PyModule_AddObjectRef(_special_ufuncs, "_scaled_exp1", _scaled_exp1);
 
     PyObject *_sinpi = SpecFun_NewUFunc(
-        {static_cast<func_f_f_t>(special::sinpi), static_cast<func_d_d_t>(special::sinpi),
+        {[](float x) { return special::sinpi(x); }, static_cast<func_d_d_t>(special::sinpi),
          static_cast<func_F_F_t>(special::sinpi), static_cast<func_D_D_t>(special::sinpi)},
         "_sinpi", _sinpi_doc
     );
@@ -418,8 +418,8 @@ PyMODINIT_FUNC PyInit__special_ufuncs() {
     PyModule_AddObjectRef(_special_ufuncs, "iv", iv);
 
     PyObject *iv_ratio = SpecFun_NewUFunc(
-        {static_cast<func_dd_d_t>(special::iv_ratio), static_cast<func_ff_f_t>(special::iv_ratio)},
-        "_iv_ratio", iv_ratio_doc
+        {static_cast<func_dd_d_t>(special::iv_ratio), static_cast<func_ff_f_t>(special::iv_ratio)}, "_iv_ratio",
+        iv_ratio_doc
     );
     PyModule_AddObjectRef(_special_ufuncs, "_iv_ratio", iv_ratio);
 
